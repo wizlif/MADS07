@@ -11,13 +11,17 @@ class BaseApp extends StatelessWidget {
       routerConfig: appRouter,
       theme: FlexThemeData.light(
         scheme: FlexScheme.flutterDash,
+        fontFamily: 'Poppins',
       ).copyWith(
         textTheme: ThemeData.light().textTheme.apply(
               bodyColor: Colors.white,
               displayColor: Colors.white,
             ),
       ),
-      darkTheme: FlexThemeData.dark(scheme: FlexScheme.flutterDash),
+      darkTheme: FlexThemeData.dark(
+        scheme: FlexScheme.flutterDash,
+        fontFamily: 'Poppins',
+      ),
       themeMode: ThemeMode.light,
       debugShowCheckedModeBanner: false,
     );
