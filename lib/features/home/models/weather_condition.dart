@@ -1,9 +1,12 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:nssf_interview/features/home/models/clouds.dart';
 import 'package:nssf_interview/features/home/models/condition_sys.dart';
 import 'package:nssf_interview/features/home/models/main.dart';
 import 'package:nssf_interview/features/home/models/weather.dart';
 import 'package:nssf_interview/features/home/models/wind.dart';
+
+part 'weather_condition.ext.dart';
 
 /// {@template todays_weather}
 /// TodaysWeather description

@@ -9,8 +9,6 @@ import 'package:nssf_interview/features/home/models/sys.dart';
 import 'package:nssf_interview/features/home/models/weather.dart';
 import 'package:nssf_interview/features/home/models/wind.dart';
 
-part 'weather_forecast.ext.dart';
-
 /// {@template day_weather}
 /// DayWeather description
 /// {@endtemplate}
@@ -121,4 +119,35 @@ class WeatherForecast extends Equatable {
         'sys': sys.toJson(),
         'dt_txt': dt_txt,
       };
+
+  /// Get the weather's day of week e.g Monday
+  String get dayOfWeek => DateFormat('EEEE').format(dt);
+
+
+  /// Weather icon
+  IconData get icon {
+    String iconCode = weather.first.icon.split('.').first;
+    iconCode = iconCode.substring(0, iconCode.length - 1);
+
+    switch (iconCode) {
+      case '02':
+        return WeatherIcons.two;
+      case '03':
+        return WeatherIcons.three;
+      case '04':
+        return WeatherIcons.four;
+      case '09':
+        return WeatherIcons.nine;
+      case '10':
+        return WeatherIcons.ten;
+      case '11':
+        return WeatherIcons.eleven;
+      case '13':
+        return WeatherIcons.thirteen;
+      case '50':
+        return WeatherIcons.fifty;
+      default:
+        return WeatherIcons.one;
+    }
+  }
 }

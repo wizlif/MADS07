@@ -17,7 +17,6 @@ class WeatherForrecastsList extends ConsumerWidget {
                 delegate: AppBarDelegate(
                   expandedHeight: 250,
                   secondaryColor: const Color(0xFF498FE1),
-                  forecast: forecasts.first.first,
                 ),
                 pinned: true,
               ),

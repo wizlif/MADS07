@@ -1,40 +1,11 @@
-part of 'weather_forecast.dart';
+part of 'weather_condition.dart';
 
-extension WeatherForecastExtension on WeatherForecast {
-  /// Get the weather's day of week e.g Monday
-  String get dayOfWeek => DateFormat('EEEE').format(dt);
+extension WeatherConditionExtension on WeatherCondition {
 
   /// Weather icon lottie animation
   String get animatedIcon {
     final iconCode = weather.first.icon.split('.').first;
     return 'assets/animations/${iconCode.substring(0, iconCode.length - 1)}.json';
-  }
-
-  /// Weather icon
-  IconData get icon {
-    String iconCode = weather.first.icon.split('.').first;
-    iconCode = iconCode.substring(0, iconCode.length - 1);
-
-    switch (iconCode) {
-      case '02':
-        return WeatherIcons.two;
-      case '03':
-        return WeatherIcons.three;
-      case '04':
-        return WeatherIcons.four;
-      case '09':
-        return WeatherIcons.nine;
-      case '10':
-        return WeatherIcons.ten;
-      case '11':
-        return WeatherIcons.eleven;
-      case '13':
-        return WeatherIcons.thirteen;
-      case '50':
-        return WeatherIcons.fifty;
-      default:
-        return WeatherIcons.one;
-    }
   }
 
   /// Weather icon
