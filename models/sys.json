@@ -1,0 +1,11 @@
+{
+  "model_name": "sys",
+  "properties": [
+    {
+      "name": "pod",
+      "type": "String"
+    }
+  ],
+  "style": "basic",
+  "additionals": ["json", "equatable", "copyWith"]
+}

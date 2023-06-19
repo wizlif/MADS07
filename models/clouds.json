@@ -1,0 +1,11 @@
+{
+  "model_name": "clouds",
+  "properties": [
+    {
+      "name": "all",
+      "type": "int"
+    }
+  ],
+  "style": "basic",
+  "additionals": ["json", "equatable", "copyWith"]
+}

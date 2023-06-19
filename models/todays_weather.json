@@ -1,0 +1,72 @@
+{
+  "model_name": "todays_weather",
+  "properties": [
+    {
+      "name": "weather",
+      "type": "List<Weather>"
+    },
+    {
+      "name": "base",
+      "type": "String"
+    },
+    {
+      "name": "main",
+      "type": "main"
+    },
+    {
+      "name": "visibility",
+      "type": "int"
+    },
+    {
+      "name": "wind",
+      "type": "wind"
+    },
+    {
+      "name": "clouds",
+      "type": "clouds"
+    },
+    {
+      "name": "dt",
+      "type": "int"
+    },
+    {
+      "name": "sys",
+      "type": "TodaysSys"
+    },
+    {
+      "name": "timezone",
+      "type": "int"
+    },
+    {
+      "name": "id",
+      "type": "int"
+    },
+    {
+      "name": "name",
+      "type": "String"
+    },
+    {
+      "name": "cod",
+      "type": "int"
+    }
+  ],
+  "style": "basic",
+  "relations": [
+    {
+      "name": "Weather"
+    },
+    {
+      "name": "Main"
+    },
+    {
+      "name": "Wind"
+    },
+    {
+      "name": "Clouds"
+    },
+    {
+      "name": "TodaysSys"
+    }
+  ],
+  "additionals": ["json", "equatable", "copyWith"]
+}

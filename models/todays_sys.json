@@ -1,0 +1,27 @@
+{
+  "model_name": "todays_sys",
+  "properties": [
+    {
+      "name": "type",
+      "type": "int"
+    },
+    {
+      "name": "id",
+      "type": "int"
+    },
+    {
+      "name": "country",
+      "type": "String"
+    },
+    {
+      "name": "sunrise",
+      "type": "int"
+    },
+    {
+      "name": "sunset",
+      "type": "int"
+    }
+  ],
+  "style": "basic",
+  "additionals": ["json", "equatable", "copyWith"]
+}

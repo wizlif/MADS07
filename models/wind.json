@@ -1,0 +1,19 @@
+{
+  "model_name": "wind",
+  "properties": [
+    {
+      "name": "speed",
+      "type": "double"
+    },
+    {
+      "name": "deg",
+      "type": "int"
+    },
+    {
+      "name": "gust",
+      "type": "double"
+    }
+  ],
+  "style": "basic",
+  "additionals": ["json", "equatable", "copyWith"]
+}

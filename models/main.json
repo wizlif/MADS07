@@ -1,0 +1,43 @@
+{
+  "model_name": "main",
+  "properties": [
+    {
+      "name": "temp",
+      "type": "double"
+    },
+    {
+      "name": "feels_like",
+      "type": "double"
+    },
+    {
+      "name": "temp_min",
+      "type": "double"
+    },
+    {
+      "name": "temp_max",
+      "type": "double"
+    },
+    {
+      "name": "pressure",
+      "type": "int"
+    },
+    {
+      "name": "sea_level",
+      "type": "int"
+    },
+    {
+      "name": "grnd_level",
+      "type": "int"
+    },
+    {
+      "name": "humidity",
+      "type": "int"
+    },
+    {
+      "name": "temp_kf",
+      "type": "double?"
+    }
+  ],
+  "style": "basic",
+  "additionals": ["json", "equatable", "copyWith"]
+}

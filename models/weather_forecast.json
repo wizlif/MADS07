@@ -1,0 +1,60 @@
+{
+  "model_name": "weather_forecast",
+  "properties": [
+    {
+      "name": "dt",
+      "type": "int"
+    },
+    {
+      "name": "main",
+      "type": "main"
+    },
+    {
+      "name": "weather",
+      "type": "List<Weather>"
+    },
+    {
+      "name": "clouds",
+      "type": "clouds"
+    },
+    {
+      "name": "wind",
+      "type": "wind"
+    },
+    {
+      "name": "visibility",
+      "type": "int"
+    },
+    {
+      "name": "pop",
+      "type": "double"
+    },
+    {
+      "name": "sys",
+      "type": "sys"
+    },
+    {
+      "name": "dt_txt",
+      "type": "String"
+    }
+  ],
+  "style": "basic",
+  "relations": [
+    {
+      "name": "Main"
+    },
+    {
+      "name": "Weather"
+    },
+    {
+      "name": "Clouds"
+    },
+    {
+      "name": "Wind"
+    },
+    {
+      "name": "Sys"
+    }
+  ],
+  "additionals": ["json", "equatable", "copyWith"]
+}

@@ -1,0 +1,23 @@
+{
+  "model_name": "weather",
+  "properties": [
+    {
+      "name": "id",
+      "type": "int"
+    },
+    {
+      "name": "main",
+      "type": "String"
+    },
+    {
+      "name": "description",
+      "type": "String"
+    },
+    {
+      "name": "icon",
+      "type": "String"
+    }
+  ],
+  "style": "basic",
+  "additionals": ["json", "equatable", "copyWith"]
+}
