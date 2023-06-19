@@ -1,5 +1,7 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:nssf_interview/core/icons.dart';
 import 'package:nssf_interview/core/utils/num.ext.dart';
 import 'package:nssf_interview/features/home/models/clouds.dart';
 import 'package:nssf_interview/features/home/models/main.dart';
@@ -120,4 +122,37 @@ class WeatherForecast extends Equatable {
 
   /// Get the weather's day of week e.g Monday
   String get dayOfWeek => DateFormat('EEEE').format(dt);
+
+  /// Weather icon lottie animation
+  String get animatedIcon {
+    final iconCode = weather.first.icon.split('.').first;
+    return 'assets/animations/${iconCode.substring(0, iconCode.length - 1)}.json';
+  }
+
+  /// Weather icon
+  IconData get icon {
+    String iconCode = weather.first.icon.split('.').first;
+    iconCode = iconCode.substring(0, iconCode.length - 1);
+
+    switch (iconCode) {
+      case '02':
+        return WeatherIcons.two;
+      case '03':
+        return WeatherIcons.three;
+      case '04':
+        return WeatherIcons.four;
+      case '09':
+        return WeatherIcons.nine;
+      case '10':
+        return WeatherIcons.ten;
+      case '11':
+        return WeatherIcons.eleven;
+      case '13':
+        return WeatherIcons.thirteen;
+      case '50':
+        return WeatherIcons.fifty;
+      default:
+        return WeatherIcons.one;
+    }
+  }
 }

@@ -9,9 +9,16 @@ class BaseApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       routerConfig: appRouter,
-      theme: FlexThemeData.light(scheme: FlexScheme.flutterDash),
+      theme: FlexThemeData.light(
+        scheme: FlexScheme.flutterDash,
+      ).copyWith(
+        textTheme: ThemeData.light().textTheme.apply(
+              bodyColor: Colors.white,
+              displayColor: Colors.white,
+            ),
+      ),
       darkTheme: FlexThemeData.dark(scheme: FlexScheme.flutterDash),
-      themeMode: ThemeMode.system,
+      themeMode: ThemeMode.light,
       debugShowCheckedModeBanner: false,
     );
   }
