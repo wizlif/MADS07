@@ -24,35 +24,8 @@ class WeatherForrecastsList extends ConsumerWidget {
                 delegate: SliverChildBuilderDelegate(
                   childCount: forecasts.length - 1,
                   (context, index) {
-                    final dayForecasts = forecasts[index + 1];
-                    final forecast = dayForecasts.first;
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 8.0,
-                        vertical: 16,
-                      ),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            flex: 2,
-                            child: Text(forecast.dayOfWeek),
-                          ),
-                          Expanded(
-                            child: Icon(
-                              forecast.icon,
-                              color: Colors.white,
-                            ),
-                          ),
-                          Expanded(
-                            flex: 2,
-                            child: Text(
-                              '${forecast.main.temp_max.toInt()}°',
-                              textAlign: TextAlign.end,
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
+                    final forecast = forecasts[index + 1].first;
+                    return ForecastTile(forecast: forecast);
                   },
                 ),
               )
