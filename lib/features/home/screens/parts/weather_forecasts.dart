@@ -16,7 +16,6 @@ class WeatherForrecastsList extends ConsumerWidget {
               SliverPersistentHeader(
                 delegate: AppBarDelegate(
                   expandedHeight: 250,
-                  primaryColor: const Color(0xFFF3BB1D),
                   secondaryColor: const Color(0xFF498FE1),
                   forecast: forecasts.first.first,
                 ),

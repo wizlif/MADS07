@@ -2,13 +2,11 @@ part of '../home_page.dart';
 
 class AppBarDelegate extends SliverPersistentHeaderDelegate {
   final double expandedHeight;
-  final Color primaryColor;
   final Color secondaryColor;
   final WeatherForecast forecast;
 
   AppBarDelegate({
     required this.expandedHeight,
-    required this.primaryColor,
     required this.secondaryColor,
     required this.forecast,
   });
@@ -23,25 +21,16 @@ class AppBarDelegate extends SliverPersistentHeaderDelegate {
       clipBehavior: Clip.none,
       fit: StackFit.expand,
       children: [
-        ColoredBox(color: primaryColor),
+        ColoredBox(color: forecast.color),
         if (shrinkOffset < 100) ...[
           _HeaderContent(
             forecast: forecast,
             color: secondaryColor,
           ),
-          // Positioned(
-          //   top: kToolbarHeight,
-          //   child: IconButton(
-          //     icon: const Icon(CollactionIcons.left),
-          //     iconSize: 24,
-          //     onPressed: context.pop,
-          //     color: Colors.white,
-          //   ),
-          // )
         ] else
           AppBar(
             elevation: 0,
-            backgroundColor: primaryColor,
+            backgroundColor: forecast.color,
           ),
       ],
     );
