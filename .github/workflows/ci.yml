@@ -92,7 +92,7 @@ jobs:
           git config --global user.email 'wizlif@users.noreply.github.com'
           git config advice.addIgnoredFile false
           git add -f ./resources/coverage_badge.svg
-          git commit -m "chore: add coverage badge"
+          git diff --exit-code || git commit -am "chore: add coverage badge"
           git push
       - name: Upload coverage to codecov
         uses: codecov/codecov-action@v3
@@ -146,6 +146,6 @@ jobs:
           git config --global user.email 'wizlif@users.noreply.github.com'
           git config advice.addIgnoredFile false
           git add -f ./resources/app-release.apk
-          git commit -m "chore: add release apk"
+          git diff --exit-code || git commit -am "chore: add release apk"
           git push
 
