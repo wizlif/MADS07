@@ -40,6 +40,7 @@ jobs:
 
       - name: Build generated code
         run: |
+          echo ${{ secrets.ENV }} | base64 -d > .env
           flutter pub run build_runner build --delete-conflicting-outputs
 
       - name: Cache files including generated
@@ -51,7 +52,6 @@ jobs:
 
       - name: Statically analyze the Dart code
         run: |
-          echo "" | base64 -d > .env
           dart analyze .
 
   test:
@@ -78,11 +78,11 @@ jobs:
 
       - name: Build generated code
         run: |
+          echo ${{ secrets.ENV }} | base64 -d > .env
           flutter pub run build_runner build --delete-conflicting-outputs
 
       - name: Run tests and generate coverage
         run: |
-          echo "" | base64 -d > .env
           flutter test --coverage -r expanded .
 
       - name: Upload coverage to codecov
