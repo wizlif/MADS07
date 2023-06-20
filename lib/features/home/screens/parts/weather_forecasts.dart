@@ -1,7 +1,7 @@
 part of '../home_page.dart';
 
-class WeatherForrecastsList extends ConsumerWidget {
-  const WeatherForrecastsList({super.key});
+class WeatherForecastsList extends ConsumerWidget {
+  const WeatherForecastsList({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -9,14 +9,15 @@ class WeatherForrecastsList extends ConsumerWidget {
 
     return forecastsSync.when(
       data: (forecasts) {
+        final color = forecasts.first.first.state.color;
         return Scaffold(
-          backgroundColor: const Color(0xFF498FE1),
+          backgroundColor: color,
           body: CustomScrollView(
             slivers: [
               SliverPersistentHeader(
                 delegate: AppBarDelegate(
-                  expandedHeight: 250,
-                  secondaryColor: const Color(0xFF498FE1),
+                  expandedHeight: 357,
+                  secondaryColor: color,
                 ),
                 pinned: true,
               ),

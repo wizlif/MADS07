@@ -7,6 +7,7 @@ import 'package:nssf_interview/features/home/models/clouds.dart';
 import 'package:nssf_interview/features/home/models/main.dart';
 import 'package:nssf_interview/features/home/models/sys.dart';
 import 'package:nssf_interview/features/home/models/weather.dart';
+import 'package:nssf_interview/features/home/models/weather_condition.dart';
 import 'package:nssf_interview/features/home/models/wind.dart';
 
 /// {@template day_weather}
@@ -24,23 +25,28 @@ class WeatherForecast extends Equatable {
     required this.pop,
     required this.sys,
     required this.dt_txt,
+    required this.state,
   });
 
   /// Creates a DayWeather from Json map
-  factory WeatherForecast.fromJson(Map<String, dynamic> json) =>
-      WeatherForecast(
-        dt: (json['dt'] as int).toDateTime,
-        main: Main.fromJson(json['main'] as Map<String, dynamic>),
-        weather: (json['weather'] as List<dynamic>)
-            .map((dynamic e) => Weather.fromJson(e as Map<String, dynamic>))
-            .toList(),
-        clouds: Clouds.fromJson(json['clouds'] as Map<String, dynamic>),
-        wind: Wind.fromJson(json['wind'] as Map<String, dynamic>),
-        visibility: (json['visibility'] as num).toInt(),
-        pop: (json['pop'] as num).toDouble(),
-        sys: Sys.fromJson(json['sys'] as Map<String, dynamic>),
-        dt_txt: json['dt_txt'] as String,
-      );
+  factory WeatherForecast.fromJson(Map<String, dynamic> json) {
+    final weatherList = (json['weather'] as List<dynamic>)
+        .map((dynamic e) => Weather.fromJson(e as Map<String, dynamic>))
+        .toList();
+
+    return WeatherForecast(
+      dt: (json['dt'] as int).toDateTime,
+      main: Main.fromJson(json['main'] as Map<String, dynamic>),
+      weather: weatherList,
+      clouds: Clouds.fromJson(json['clouds'] as Map<String, dynamic>),
+      wind: Wind.fromJson(json['wind'] as Map<String, dynamic>),
+      visibility: (json['visibility'] as num).toInt(),
+      pop: (json['pop'] as num).toDouble(),
+      sys: Sys.fromJson(json['sys'] as Map<String, dynamic>),
+      dt_txt: json['dt_txt'] as String,
+      state: weatherList.weatherState,
+    );
+  }
 
   /// A description for dt
   final DateTime dt;
@@ -69,6 +75,9 @@ class WeatherForecast extends Equatable {
   /// A description for dt_txt
   final String dt_txt;
 
+  /// Weather State
+  final WeatherState state;
+
   /// Creates a copy of the current DayWeather with property changes
   WeatherForecast copyWith({
     DateTime? dt,
@@ -80,6 +89,7 @@ class WeatherForecast extends Equatable {
     double? pop,
     Sys? sys,
     String? dt_txt,
+    WeatherState? state,
   }) {
     return WeatherForecast(
       dt: dt ?? this.dt,
@@ -91,6 +101,7 @@ class WeatherForecast extends Equatable {
       pop: pop ?? this.pop,
       sys: sys ?? this.sys,
       dt_txt: dt_txt ?? this.dt_txt,
+      state: state ?? this.state,
     );
   }
 
@@ -123,31 +134,15 @@ class WeatherForecast extends Equatable {
   /// Get the weather's day of week e.g Monday
   String get dayOfWeek => DateFormat('EEEE').format(dt);
 
-
   /// Weather icon
   IconData get icon {
-    String iconCode = weather.first.icon.split('.').first;
-    iconCode = iconCode.substring(0, iconCode.length - 1);
-
-    switch (iconCode) {
-      case '02':
-        return WeatherIcons.two;
-      case '03':
-        return WeatherIcons.three;
-      case '04':
-        return WeatherIcons.four;
-      case '09':
-        return WeatherIcons.nine;
-      case '10':
-        return WeatherIcons.ten;
-      case '11':
-        return WeatherIcons.eleven;
-      case '13':
-        return WeatherIcons.thirteen;
-      case '50':
-        return WeatherIcons.fifty;
-      default:
-        return WeatherIcons.one;
+    switch (state) {
+      case WeatherState.SUNNY:
+        return WeatherIcons.sunny;
+      case WeatherState.CLOUDY:
+        return WeatherIcons.partly_sunny;
+      case WeatherState.RAINY:
+        return WeatherIcons.rain;
     }
   }
 }

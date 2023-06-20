@@ -26,26 +26,31 @@ class WeatherCondition extends Equatable {
     required this.id,
     required this.name,
     required this.cod,
+    required this.state,
   });
 
   /// Creates a TodaysWeather from Json map
-  factory WeatherCondition.fromJson(Map<String, dynamic> json) =>
-      WeatherCondition(
-        weather: (json['weather'] as List<dynamic>)
-            .map((dynamic e) => Weather.fromJson(e as Map<String, dynamic>))
-            .toList(),
-        base: json['base'] as String,
-        main: Main.fromJson(json['main'] as Map<String, dynamic>),
-        visibility: json['visibility'] as int,
-        wind: Wind.fromJson(json['wind'] as Map<String, dynamic>),
-        clouds: Clouds.fromJson(json['clouds'] as Map<String, dynamic>),
-        dt: json['dt'] as int,
-        sys: ConditionSys.fromJson(json['sys'] as Map<String, dynamic>),
-        timezone: json['timezone'] as int,
-        id: json['id'] as int,
-        name: json['name'] as String,
-        cod: json['cod'] as int,
-      );
+  factory WeatherCondition.fromJson(Map<String, dynamic> json) {
+    final weatherList = (json['weather'] as List<dynamic>)
+        .map((dynamic e) => Weather.fromJson(e as Map<String, dynamic>))
+        .toList();
+
+    return WeatherCondition(
+      weather: weatherList,
+      base: json['base'] as String,
+      main: Main.fromJson(json['main'] as Map<String, dynamic>),
+      visibility: json['visibility'] as int,
+      wind: Wind.fromJson(json['wind'] as Map<String, dynamic>),
+      clouds: Clouds.fromJson(json['clouds'] as Map<String, dynamic>),
+      dt: json['dt'] as int,
+      sys: ConditionSys.fromJson(json['sys'] as Map<String, dynamic>),
+      timezone: json['timezone'] as int,
+      id: json['id'] as int,
+      name: json['name'] as String,
+      cod: json['cod'] as int,
+      state: weatherList.weatherState,
+    );
+  }
 
   /// A description for weather
   final List<Weather> weather;
@@ -83,6 +88,9 @@ class WeatherCondition extends Equatable {
   /// A description for cod
   final int cod;
 
+  /// Weather State
+  final WeatherState state;
+
   /// Creates a copy of the current TodaysWeather with property changes
   WeatherCondition copyWith({
     List<Weather>? weather,
@@ -97,6 +105,7 @@ class WeatherCondition extends Equatable {
     int? id,
     String? name,
     int? cod,
+    WeatherState? state,
   }) {
     return WeatherCondition(
       weather: weather ?? this.weather,
@@ -111,6 +120,7 @@ class WeatherCondition extends Equatable {
       id: id ?? this.id,
       name: name ?? this.name,
       cod: cod ?? this.cod,
+      state: state ?? this.state,
     );
   }
 

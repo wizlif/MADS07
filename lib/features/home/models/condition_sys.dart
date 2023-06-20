@@ -15,18 +15,18 @@ class ConditionSys extends Equatable {
 
   /// Creates a TodaysSys from Json map
   factory ConditionSys.fromJson(Map<String, dynamic> json) => ConditionSys(
-        type: (json['type'] as num).toInt(),
-        id: json['id'] as int,
+        type: (json['type'] as num?)?.toInt(),
+        id: (json['id'] as num?)?.toInt(),
         country: json['country'] as String,
         sunrise: (json['sunrise'] as num).toInt(),
         sunset: (json['sunset'] as num).toInt(),
       );
 
   /// A description for type
-  final int type;
+  final int? type;
 
   /// A description for id
-  final int id;
+  final int? id;
 
   /// A description for country
   final String country;

@@ -17,6 +17,12 @@ class AppbarHeader extends StatelessWidget {
         Expanded(
           child: Stack(
             children: [
+              Positioned.fill(
+                child: Image.asset(
+                  weather.background,
+                  fit: BoxFit.fitWidth,
+                ),
+              ),
               Center(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -29,7 +35,7 @@ class AppbarHeader extends StatelessWidget {
                       ),
                       textAlign: TextAlign.center,
                     ),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 8),
                     Text(
                       weather.weather.first.main.toUpperCase(),
                       style: context.headlineSmall?.copyWith(
@@ -40,18 +46,18 @@ class AppbarHeader extends StatelessWidget {
                   ],
                 ),
               ),
-              Positioned.fill(
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Lottie.asset(
-                      weather.animatedIcon,
-                      width: context.screenWidth / 3,
-                    ),
-                  ),
-                ),
-              ),
+              // Positioned.fill(
+              //   child: Align(
+              //     alignment: Alignment.centerLeft,
+              //     child: Padding(
+              //       padding: const EdgeInsets.all(8.0),
+              //       child: Lottie.asset(
+              //         weather.animatedIcon,
+              //         width: context.screenWidth / 3,
+              //       ),
+              //     ),
+              //   ),
+              // ),
             ],
           ),
         ),

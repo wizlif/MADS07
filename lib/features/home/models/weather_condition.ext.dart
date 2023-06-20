@@ -1,37 +1,62 @@
 part of 'weather_condition.dart';
 
 extension WeatherConditionExtension on WeatherCondition {
-
   /// Weather icon lottie animation
-  String get animatedIcon {
-    final iconCode = weather.first.icon.split('.').first;
-    return 'assets/animations/${iconCode.substring(0, iconCode.length - 1)}.json';
+  // String get animatedIcon {
+  //   return 'assets/animations/$iconCode.json';
+  // }
+
+  /// Weather background
+  String get background {
+    return 'assets/images/sea_${state.value}.png';
   }
 
   /// Weather icon
   Color get color {
-    String iconCode = weather.first.icon.split('.').first;
-    iconCode = iconCode.substring(0, iconCode.length - 1);
-
-    switch (iconCode) {
-      case '02':
-        return const Color(0xFF87CBDE);
-      case '03':
-        return const Color(0xFFd0cccc);
-      case '04':
-        return const Color(0xFFDAD3E1);
-      case '09':
-        return const Color(0xFFF0EDDE);
-      case '10':
-        return const Color(0xFFbad3dd);
-      case '11':
-        return const Color(0xFFd1d1e3);
-      case '13':
-        return const Color(0xFFc2cda3);
-      case '50':
-        return const Color(0xFFc7e1e4);
-      default:
-        return const Color(0xFFfdcc6c);
+    switch (state) {
+      case WeatherState.SUNNY:
+        return const Color(0xFF47AB2F);
+      case WeatherState.CLOUDY:
+        return const Color(0xFF54717A);
+      case WeatherState.RAINY:
+        return const Color(0xFF57575D);
     }
+  }
+}
+
+enum WeatherState {
+  SUNNY('sunny'),
+  CLOUDY('cloudy'),
+  RAINY('rainy');
+
+  final String value;
+  const WeatherState(this.value);
+}
+
+extension WeatherExtension on WeatherState{
+  Color get color {
+        switch (this) {
+      case WeatherState.SUNNY:
+        return const Color(0xFF4A90E2);
+      case WeatherState.CLOUDY:
+        return const Color(0xFF628593);
+      case WeatherState.RAINY:
+        return const Color(0xFF57575C);
+    }
+  }
+}
+
+extension ConditionListExtension on List<Weather> {
+  WeatherState get weatherState {
+    final c = first.icon.split('.').first;
+    final code = c.substring(0, c.length - 1);
+
+    if (code == '01') {
+      return WeatherState.SUNNY;
+    } else if (['02', '03', '04'].contains(code)) {
+      return WeatherState.CLOUDY;
+    }
+
+    return WeatherState.RAINY;
   }
 }

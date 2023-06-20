@@ -25,13 +25,7 @@ class WeatherIcons {
 
   static const _kFontFam = 'WeatherIcons';
 
-  static const IconData one = IconData(0xe800, fontFamily: _kFontFam);
-  static const IconData four = IconData(0xe801, fontFamily: _kFontFam);
-  static const IconData three = IconData(0xe802, fontFamily: _kFontFam);
-  static const IconData eleven = IconData(0xe803, fontFamily: _kFontFam);
-  static const IconData nine = IconData(0xe804, fontFamily: _kFontFam);
-  static const IconData two = IconData(0xe805, fontFamily: _kFontFam);
-  static const IconData thirteen = IconData(0xe806, fontFamily: _kFontFam);
-  static const IconData ten = IconData(0xe80a, fontFamily: _kFontFam);
-  static const IconData fifty = IconData(0xe80b, fontFamily: _kFontFam);
+  static const IconData rain = IconData(0xe800, fontFamily: _kFontFam);
+  static const IconData partly_sunny = IconData(0xe805, fontFamily: _kFontFam);
+  static const IconData sunny = IconData(0xe807, fontFamily: _kFontFam);
 }
