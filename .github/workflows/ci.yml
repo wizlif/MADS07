@@ -88,7 +88,8 @@ jobs:
         run: |
           flutter pub run test_coverage_badge
           mv coverage_badge.svg ./resources/
-          git add ./resources/coverage_badge.svg
+          git config advice.addIgnoredFile false
+          git add -f ./resources/coverage_badge.svg
           git commit -m "chore: add coverage badge"
           git push
       - name: Upload coverage to codecov
@@ -139,7 +140,8 @@ jobs:
           echo ${{ secrets.ENV }} | base64 -d > .env
           flutter build apk --release
           mv build/app/outputs/flutter-apk/app-release.apk ./resources/
-          git add build/app/outputs/flutter-apk/app-release.apk
+          git config advice.addIgnoredFile false
+          git add -f build/app/outputs/flutter-apk/app-release.apk
           git commit -m "chore: add release apk"
           git push
 
