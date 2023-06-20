@@ -36,7 +36,7 @@ jobs:
         run: flutter pub get .
 
       - name: Check for any formatting issues
-        run: flutter format --dry-run --set-exit-if-changed .
+        run: flutter format --set-exit-if-changed .
 
       - name: Build generated code
         run: |
@@ -52,7 +52,7 @@ jobs:
       - name: Statically analyze the Dart code
         run: |
           echo "" | base64 -d > .env
-          flutter analyze .
+          dart analyze .
 
   test:
     runs-on: ubuntu-latest
