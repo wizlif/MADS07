@@ -128,9 +128,6 @@ jobs:
       - name: Get Flutter dependencies
         run: flutter pub get .
 
-      - name: Generate app icons
-        run: flutter pub run flutter_launcher_icons:main
-
       - name: Build apk
         run: |
           echo ${{ secrets.ENV }} | base64 -d > .env
