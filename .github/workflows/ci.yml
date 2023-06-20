@@ -1,0 +1,138 @@
+name: CI
+
+on:
+  push:
+    branches: [master, ci/create-continous-integration]
+  pull_request:
+    types: [opened, synchronize]
+  workflow_dispatch:
+
+env:
+  flutter_version: "3.7.9"
+  flutter_channel: "stable"
+  java_version: "12.x"
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Fetch code from repository
+        uses: actions/checkout@v2
+
+      - name: Cache Flutter install
+        uses: actions/cache@v3
+        with:
+          path: /opt/hostedtoolcache/flutter
+          key: cache-flutter-${{ env.flutter_channel }}-${{ env.flutter_version }}-${{ runner.os }}
+
+      - name: Setup the Flutter environment
+        uses: subosito/flutter-action@v2
+        with:
+          channel: ${{ env.flutter_channel }}
+          flutter-version: ${{ env.flutter_version }}
+
+      - name: Get Flutter dependencies
+        run: flutter pub get .
+
+      - name: Check for any formatting issues
+        run: flutter format --dry-run --set-exit-if-changed .
+
+      - name: Build generated code
+        run: |
+          flutter pub run build_runner build --delete-conflicting-outputs
+
+      - name: Cache files including generated
+        id: code-cache
+        uses: actions/cache@v3
+        with:
+          path: .
+          key: code-cache-${{ github.sha }}
+
+      - name: Statically analyze the Dart code
+        run: |
+          echo "" | base64 -d > .env
+          flutter analyze .
+
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Fetch code from repository
+        uses: actions/checkout@v2
+
+      - name: Cache Flutter install
+        uses: actions/cache@v3
+        with:
+          path: /opt/hostedtoolcache/flutter
+          key: cache-flutter-${{ env.flutter_channel }}-${{ env.flutter_version }}-${{ runner.os }}
+
+      - name: Setup the Flutter environment
+        uses: subosito/flutter-action@v2
+        with:
+          channel: ${{ env.flutter_channel }}
+          flutter-version: ${{ env.flutter_version }}
+
+      - name: Get Flutter dependencies
+        run: flutter pub get .
+
+      - name: Build generated code
+        run: |
+          flutter pub run build_runner build --delete-conflicting-outputs
+
+      - name: Run tests and generate coverage
+        run: |
+          echo "" | base64 -d > .env
+          flutter test --coverage -r expanded .
+
+      - name: Upload coverage to codecov
+        uses: codecov/codecov-action@v3
+        with:
+          verbose: true
+          file: coverage/lcov.info
+
+  build_android:
+    if: ${{ github.ref == 'refs/heads/development' || github.ref == 'refs/heads/master' }}
+    needs: [analyze, test]
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Fetch code from cache
+        id: code-cache
+        uses: actions/cache@v3
+        with:
+          path: .
+          key: code-cache-${{ github.sha }}
+          restore-keys: |
+            code-cache-${{ github.sha }}
+            code-cache-
+            code-cache
+
+      - name: Setup Java for Android
+        uses: actions/setup-java@v1
+        with:
+          java-version: ${{ env.java_version }}
+
+      - name: Cache Flutter install
+        uses: actions/cache@v3
+        with:
+          path: /opt/hostedtoolcache/flutter
+          key: cache-flutter-${{ env.flutter_channel }}-${{ env.flutter_version }}-${{ runner.os }}
+
+      - name: Setup the Flutter environment
+        uses: subosito/flutter-action@v2
+        with:
+          channel: ${{ env.flutter_channel }}
+          flutter-version: ${{ env.flutter_version }}
+
+      - name: Get Flutter dependencies
+        run: flutter pub get .
+
+      - name: Generate app icons
+        run: flutter pub run flutter_launcher_icons:main
+
+      - name: Build apk
+        run: |
+          echo ${{ secrets.ENV }} | base64 -d > .env
+          flutter build apk --release
+          
