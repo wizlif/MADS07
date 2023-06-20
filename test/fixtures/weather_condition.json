@@ -1,0 +1,46 @@
+{
+  "coord": {
+    "lon": 32.587,
+    "lat": 0.3392
+  },
+  "weather": [
+    {
+      "id": 802,
+      "main": "Clouds",
+      "description": "scattered clouds",
+      "icon": "03d"
+    }
+  ],
+  "base": "stations",
+  "main": {
+    "temp": 295.76,
+    "feels_like": 295.28,
+    "temp_min": 295.76,
+    "temp_max": 295.76,
+    "pressure": 1014,
+    "humidity": 46,
+    "sea_level": 1014,
+    "grnd_level": 884
+  },
+  "visibility": 10000,
+  "wind": {
+    "speed": 0.83,
+    "deg": 79,
+    "gust": 1.3
+  },
+  "clouds": {
+    "all": 47
+  },
+  "dt": 1687246547,
+  "sys": {
+    "type": 1,
+    "id": 2642,
+    "country": "UG",
+    "sunrise": 1687232814,
+    "sunset": 1687276518
+  },
+  "timezone": 10800,
+  "id": 443339,
+  "name": "Kampala District",
+  "cod": 200
+}

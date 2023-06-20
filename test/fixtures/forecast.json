@@ -1,0 +1,206 @@
+{
+  "cod": "200",
+  "message": 0,
+  "cnt": 5,
+  "list": [
+    {
+      "dt": 1687251600,
+      "main": {
+        "temp": 297.01,
+        "feels_like": 296.97,
+        "temp_min": 297.01,
+        "temp_max": 301.52,
+        "pressure": 1014,
+        "sea_level": 1014,
+        "grnd_level": 883,
+        "humidity": 58,
+        "temp_kf": -4.51
+      },
+      "weather": [
+        {
+          "id": 803,
+          "main": "Clouds",
+          "description": "broken clouds",
+          "icon": "04d"
+        }
+      ],
+      "clouds": {
+        "all": 51
+      },
+      "wind": {
+        "speed": 1.44,
+        "deg": 134,
+        "gust": 1.49
+      },
+      "visibility": 10000,
+      "pop": 0.44,
+      "sys": {
+        "pod": "d"
+      },
+      "dt_txt": "2023-06-20 09:00:00"
+    },
+    {
+      "dt": 1687262400,
+      "main": {
+        "temp": 297.15,
+        "feels_like": 297.12,
+        "temp_min": 297.15,
+        "temp_max": 298.35,
+        "pressure": 1012,
+        "sea_level": 1012,
+        "grnd_level": 880,
+        "humidity": 58,
+        "temp_kf": -1.2
+      },
+      "weather": [
+        {
+          "id": 803,
+          "main": "Clouds",
+          "description": "broken clouds",
+          "icon": "04d"
+        }
+      ],
+      "clouds": {
+        "all": 55
+      },
+      "wind": {
+        "speed": 2.44,
+        "deg": 150,
+        "gust": 3.59
+      },
+      "visibility": 10000,
+      "pop": 0.34,
+      "sys": {
+        "pod": "d"
+      },
+      "dt_txt": "2023-06-20 12:00:00"
+    },
+    {
+      "dt": 1687273200,
+      "main": {
+        "temp": 297.91,
+        "feels_like": 297.9,
+        "temp_min": 297.91,
+        "temp_max": 297.91,
+        "pressure": 1010,
+        "sea_level": 1010,
+        "grnd_level": 880,
+        "humidity": 56,
+        "temp_kf": 0
+      },
+      "weather": [
+        {
+          "id": 802,
+          "main": "Clouds",
+          "description": "scattered clouds",
+          "icon": "03d"
+        }
+      ],
+      "clouds": {
+        "all": 49
+      },
+      "wind": {
+        "speed": 1.7,
+        "deg": 166,
+        "gust": 2.34
+      },
+      "visibility": 10000,
+      "pop": 0.2,
+      "sys": {
+        "pod": "d"
+      },
+      "dt_txt": "2023-06-20 15:00:00"
+    },
+    {
+      "dt": 1687284000,
+      "main": {
+        "temp": 292.22,
+        "feels_like": 292.4,
+        "temp_min": 292.22,
+        "temp_max": 292.22,
+        "pressure": 1013,
+        "sea_level": 1013,
+        "grnd_level": 880,
+        "humidity": 85,
+        "temp_kf": 0
+      },
+      "weather": [
+        {
+          "id": 500,
+          "main": "Rain",
+          "description": "light rain",
+          "icon": "10n"
+        }
+      ],
+      "clouds": {
+        "all": 50
+      },
+      "wind": {
+        "speed": 0.61,
+        "deg": 290,
+        "gust": 0.8
+      },
+      "visibility": 10000,
+      "pop": 0.43,
+      "rain": {
+        "3h": 0.86
+      },
+      "sys": {
+        "pod": "n"
+      },
+      "dt_txt": "2023-06-20 18:00:00"
+    },
+    {
+      "dt": 1687294800,
+      "main": {
+        "temp": 290.37,
+        "feels_like": 290.63,
+        "temp_min": 290.37,
+        "temp_max": 290.37,
+        "pressure": 1014,
+        "sea_level": 1014,
+        "grnd_level": 880,
+        "humidity": 95,
+        "temp_kf": 0
+      },
+      "weather": [
+        {
+          "id": 500,
+          "main": "Rain",
+          "description": "light rain",
+          "icon": "10n"
+        }
+      ],
+      "clouds": {
+        "all": 26
+      },
+      "wind": {
+        "speed": 0.63,
+        "deg": 290,
+        "gust": 1.13
+      },
+      "visibility": 10000,
+      "pop": 0.56,
+      "rain": {
+        "3h": 2.5
+      },
+      "sys": {
+        "pod": "n"
+      },
+      "dt_txt": "2023-06-20 21:00:00"
+    }
+  ],
+  "city": {
+    "id": 443339,
+    "name": "Kampala District",
+    "coord": {
+      "lat": 0.3392,
+      "lon": 32.587
+    },
+    "country": "UG",
+    "population": 0,
+    "timezone": 10800,
+    "sunrise": 1687232814,
+    "sunset": 1687276518
+  }
+}
