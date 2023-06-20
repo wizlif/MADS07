@@ -23,13 +23,13 @@ samples, guidance on mobile development, and a full API reference.
 # Tasks
 
 1. Please demonstrate best practices - including but not limited to,
-    + [ ] Architecture
-    + [ ] Design Patterns
-    + [ ] Unit Testing (TDD Preferential)
-    + [ ] Proper use of the SOLID principles
-    + [ ] Integration into a CI/CD build pipeline
+    + [x] Architecture
+    + [x] Design Patterns
+    + [x] Unit Testing (TDD Preferential)
+    + [x] Proper use of the SOLID principles
+    + [x] Integration into a CI/CD build pipeline
     + [ ] Code coverage integration
-    + [ ] Static code analysis
+    + [x] Static code analysis
     + [ ] Please note these are additional requirements, complete the ones you are comfortable with to demonstrate your knowledge and experience
 2. Please also take some initiative and implement some additional features like,
     + [ ] The ability to save different weather locations as favourites
