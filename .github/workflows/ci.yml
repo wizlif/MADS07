@@ -43,13 +43,6 @@ jobs:
           echo ${{ secrets.ENV }} | base64 -d > .env
           flutter pub run build_runner build --delete-conflicting-outputs
 
-      - name: Cache files including generated
-        id: code-cache
-        uses: actions/cache@v3
-        with:
-          path: .
-          key: code-cache-${{ github.sha }}
-
       - name: Statically analyze the Dart code
         run: |
           dart analyze .
@@ -59,7 +52,7 @@ jobs:
     timeout-minutes: 10
     steps:
       - name: Fetch code from repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Cache Flutter install
         uses: actions/cache@v3
@@ -84,16 +77,16 @@ jobs:
       - name: Run tests and generate coverage
         run: |
           flutter test --coverage -r expanded .
-      - name: Generate coverage badge
-        run: |
           flutter pub run test_coverage_badge
-          mv coverage_badge.svg ./resources/
-          git config --global user.name 'Git Bot'
-          git config --global user.email 'wizlif@users.noreply.github.com'
-          git config advice.addIgnoredFile false
-          git add -f ./resources/coverage_badge.svg
-          git diff --exit-code || git commit -am "chore: add coverage badge"
-          git push
+      
+      - name: Cache badge
+        id: coverage-cache
+        uses: actions/cache@v3
+        with:
+          path: coverage_badge.svg
+          key: coverage-cache-${{ github.sha }}
+
+
       - name: Upload coverage to codecov
         uses: codecov/codecov-action@v3
         with:
@@ -106,16 +99,17 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 60
     steps:
-      - name: Fetch code from cache
-        id: code-cache
+      - name: Fetch code from repository
+        uses: actions/checkout@v3
+
+      - name: Fetch coverage badge
+        id: coverage-cache
         uses: actions/cache@v3
         with:
-          path: .
-          key: code-cache-${{ github.sha }}
+          path: resources
+          key: coverage-cache-${{ github.sha }}
           restore-keys: |
-            code-cache-${{ github.sha }}
-            code-cache-
-            code-cache
+            coverage-cache-${{ github.sha }}
 
       - name: Setup Java for Android
         uses: actions/setup-java@v1
@@ -135,11 +129,13 @@ jobs:
           flutter-version: ${{ env.flutter_version }}
 
       - name: Get Flutter dependencies
-        run: flutter pub get .
+        run: |
+          flutter pub get .
+          echo ${{ secrets.ENV }} | base64 -d > .env
+          flutter pub run build_runner build --delete-conflicting-outputs
 
       - name: Build apk
         run: |
-          echo ${{ secrets.ENV }} | base64 -d > .env
           flutter build apk --release
           mv build/app/outputs/flutter-apk/app-release.apk ./resources/
           git config --global user.name 'Git Bot'
@@ -147,5 +143,7 @@ jobs:
           git config advice.addIgnoredFile false
           git add -f ./resources/app-release.apk
           git diff --exit-code || git commit -am "chore: add release apk"
+          git add -f ./resources/coverage_badge.svg
+          git diff --exit-code || git commit -am "chore: add coverage badge"
           git push
 

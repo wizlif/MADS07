@@ -1,4 +1,4 @@
-# nssf_interview
+# nssf_interview ![Coverage](https://raw.githubusercontent.com/wizlif/flutter_interview/master/resources/coverage_badge.svg?sanitize=true)
 
 A new Flutter project.
 
@@ -15,12 +15,15 @@ For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 
-# Running the project
+## Quick test
+[Download Android APK](https://raw.githubusercontent.com/wizlif/flutter_interview/master/resources/app-release.apk?sanitize=true)
+
+## Running the project
 
 1. Build auto-generated resources with `make build`.
 2. Run the flutter project to iOs or android. 
 
-# Tasks
+## Tasks
 
 1. Please demonstrate best practices - including but not limited to,
     + [x] Architecture
