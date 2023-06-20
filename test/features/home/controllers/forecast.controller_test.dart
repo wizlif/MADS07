@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:nssf_interview/features/home/controllers/weather.controller.dart';
-import 'package:nssf_interview/features/home/models/weather_condition.dart';
+import 'package:nssf_interview/features/home/controllers/forecast.controller.dart';
+import 'package:nssf_interview/features/home/models/weather_forecast.dart';
 import 'package:nssf_interview/features/home/repos/location/i_location_repo.dart';
 import 'package:nssf_interview/features/home/repos/weather/i_weather_repo.dart';
 
@@ -18,23 +18,27 @@ void main() {
   late ILocationRepo locationRepo;
 
   setUp(() {
+    registerFallbackValue(const AsyncLoading<List<List<WeatherForecast>>>());
+    registerFallbackValue(const AsyncValue.data(<List<WeatherForecast>>[]));
     weatherRepo = MockWeatherRepo();
     locationRepo = MockLocationRepo();
   });
 
   test(
-      'should load weather conditions '
+      'should load weather forecast '
       'when initialized', () async {
     // Setup weather
-    final json = jsonDecode(fixture('weather_condition.json'));
-    final weatherCondition = WeatherCondition.fromJson(json);
+    final json = jsonDecode(fixture('forecast.json')) as Map<String, dynamic>;
+    final weatherForecast = (json['list'] as List<dynamic>)
+        .map((e) => WeatherForecast.fromJson(e as Map<String, dynamic>))
+        .toList();
 
     when(
-      () => weatherRepo.getTodaysWeather(
+      () => weatherRepo.getForecasts(
         longitude: any(named: 'longitude'),
         latitude: any(named: 'latitude'),
       ),
-    ).thenAnswer((_) async => weatherCondition);
+    ).thenAnswer((_) async => weatherForecast);
 
     // Setup Location
     when(() => locationRepo.getCurrentLocation())
@@ -47,28 +51,33 @@ void main() {
     );
 
     // create a listener
-    final listener = Listener<AsyncValue<WeatherCondition>>();
+    final listener = Listener<AsyncValue<List<List<WeatherForecast>>>>();
     // listen to the provider and call [listener] whenever its value changes
     container.listen(
-      weatherControllerProvider,
+      forecastControllerProvider,
       listener,
       fireImmediately: true,
     );
 
-    await container.read(weatherControllerProvider.future);
+    await container.read(forecastControllerProvider.future);
 
     // verify
     verifyInOrder([
-      () => listener(null, const AsyncLoading<WeatherCondition>()),
       () => listener(
-            const AsyncLoading<WeatherCondition>(),
-            AsyncData<WeatherCondition>(weatherCondition),
+            null,
+            const AsyncLoading(),
+          ),
+      () => listener(
+            any(that: isA<AsyncLoading>()),
+            any(
+              that: isA<AsyncData>(),
+            ),
           ),
     ]);
 
     verify(() => locationRepo.getCurrentLocation()).called(1);
     verify(
-      () => weatherRepo.getTodaysWeather(
+      () => weatherRepo.getForecasts(
         longitude: any(named: 'longitude'),
         latitude: any(named: 'latitude'),
       ),
