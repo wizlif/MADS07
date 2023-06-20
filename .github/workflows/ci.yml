@@ -92,7 +92,7 @@ jobs:
           file: coverage/lcov.info
 
   build_android:
-    if: ${{ github.ref == 'refs/heads/development' || github.ref == 'refs/heads/master' }}
+    if: ${{ github.ref == 'refs/heads/ci/create-continous-integration' || github.ref == 'refs/heads/master' }}
     needs: [analyze, test]
     runs-on: ubuntu-latest
     timeout-minutes: 60
