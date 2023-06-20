@@ -88,6 +88,8 @@ jobs:
         run: |
           flutter pub run test_coverage_badge
           mv coverage_badge.svg ./resources/
+          git config --global user.name 'Git Bot'
+          git config --global user.email 'wizlif@users.noreply.github.com'
           git config advice.addIgnoredFile false
           git add -f ./resources/coverage_badge.svg
           git commit -m "chore: add coverage badge"
@@ -140,6 +142,8 @@ jobs:
           echo ${{ secrets.ENV }} | base64 -d > .env
           flutter build apk --release
           mv build/app/outputs/flutter-apk/app-release.apk ./resources/
+          git config --global user.name 'Git Bot'
+          git config --global user.email 'wizlif@users.noreply.github.com'
           git config advice.addIgnoredFile false
           git add -f build/app/outputs/flutter-apk/app-release.apk
           git commit -m "chore: add release apk"
