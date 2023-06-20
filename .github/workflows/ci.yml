@@ -145,7 +145,7 @@ jobs:
           git config --global user.name 'Git Bot'
           git config --global user.email 'wizlif@users.noreply.github.com'
           git config advice.addIgnoredFile false
-          git add -f build/app/outputs/flutter-apk/app-release.apk
+          git add -f ./resources/app-release.apk
           git commit -m "chore: add release apk"
           git push
 
