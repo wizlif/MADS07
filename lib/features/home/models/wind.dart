@@ -13,19 +13,19 @@ class Wind extends Equatable {
 
   /// Creates a Wind from Json map
   factory Wind.fromJson(Map<String, dynamic> json) => Wind(
-        speed: (json['speed'] as num).toDouble(),
-        deg: (json['deg'] as num).toInt(),
-        gust: (json['gust'] as num).toDouble(),
+        speed: (json['speed'] as num?)?.toDouble(),
+        deg: (json['deg'] as num?)?.toInt(),
+        gust: (json['gust'] as num?)?.toDouble(),
       );
 
   /// A description for speed
-  final double speed;
+  final double? speed;
 
   /// A description for deg
-  final int deg;
+  final int? deg;
 
   /// A description for gust
-  final double gust;
+  final double? gust;
 
   /// Creates a copy of the current Wind with property changes
   Wind copyWith({

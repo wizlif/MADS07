@@ -20,13 +20,13 @@ class Main extends Equatable {
   /// Creates a Main from Json map
   factory Main.fromJson(Map<String, dynamic> json) => Main(
         temp: (json['temp'] as num).toDouble(),
-        feels_like: (json['feels_like'] as num).toDouble(),
+        feels_like: (json['feels_like'] as num?)?.toDouble(),
         temp_min: (json['temp_min'] as num).toDouble(),
         temp_max: (json['temp_max'] as num).toDouble(),
-        pressure: (json['pressure'] as num).toInt(),
-        sea_level: (json['sea_level'] as num).toInt(),
-        grnd_level: (json['grnd_level'] as num).toInt(),
-        humidity: (json['humidity'] as num).toInt(),
+        pressure: (json['pressure'] as num?)?.toInt(),
+        sea_level: (json['sea_level'] as num?)?.toInt(),
+        grnd_level: (json['grnd_level'] as num?)?.toInt(),
+        humidity: (json['humidity'] as num?)?.toInt(),
         temp_kf: (json['temp_kf'] as num?)?.toDouble(),
       );
 
@@ -34,7 +34,7 @@ class Main extends Equatable {
   final double temp;
 
   /// A description for feels_like
-  final double feels_like;
+  final double? feels_like;
 
   /// A description for temp_min
   final double temp_min;
@@ -43,16 +43,16 @@ class Main extends Equatable {
   final double temp_max;
 
   /// A description for pressure
-  final int pressure;
+  final int? pressure;
 
   /// A description for sea_level
-  final int sea_level;
+  final int? sea_level;
 
   /// A description for grnd_level
-  final int grnd_level;
+  final int? grnd_level;
 
   /// A description for humidity
-  final int humidity;
+  final int? humidity;
 
   /// A description for temp_kf
   final double? temp_kf;
