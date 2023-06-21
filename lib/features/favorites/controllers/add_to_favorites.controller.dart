@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:nssf_interview/features/favorites/repos/favorites_repo.provider.dart';
-import 'package:nssf_interview/features/home/controllers/geo_info.controller.dart';
 import 'package:nssf_interview/features/home/models/geo_info.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 

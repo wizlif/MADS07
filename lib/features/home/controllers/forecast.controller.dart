@@ -1,5 +1,4 @@
 import 'package:collection/collection.dart';
-import 'package:nssf_interview/core/controllers/color.controller.dart';
 import 'package:nssf_interview/features/home/models/weather_forecast.dart';
 import 'package:nssf_interview/features/home/repos/weather/weather_repo.provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';

@@ -70,8 +70,10 @@ class WeatherRepo implements IWeatherRepo {
   }
 
   @override
-  Future<GeoInfo> getCoordinateInfo(
-      {required double longitude, required double latitude}) async {
+  Future<GeoInfo> getCoordinateInfo({
+    required double longitude,
+    required double latitude,
+  }) async {
     final response = await httpClient.get(
       reverseGeoCodeUri(
         longitude: longitude,
