@@ -31,7 +31,7 @@ samples, guidance on mobile development, and a full API reference.
     + [x] Unit Testing (TDD Preferential)
     + [x] Proper use of the SOLID principles
     + [x] Integration into a CI/CD build pipeline
-    + [ ] Code coverage integration
+    + [x] Code coverage integration
     + [x] Static code analysis
     + [ ] Please note these are additional requirements, complete the ones you are comfortable with to demonstrate your knowledge and experience
 2. Please also take some initiative and implement some additional features like,

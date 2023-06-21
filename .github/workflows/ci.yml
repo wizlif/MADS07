@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [master, ci/create-continous-integration]
+    branches: [master]
   pull_request:
     types: [opened, synchronize]
   workflow_dispatch:
@@ -79,9 +79,9 @@ jobs:
           flutter test --coverage -r expanded .
           flutter pub run test_coverage_badge
       
-      - name: Cache badge
+      - name: Cache coverage badge
+        uses: actions/cache/save@v3
         id: coverage-cache
-        uses: actions/cache@v3
         with:
           path: coverage_badge.svg
           key: coverage-cache-${{ github.sha }}
@@ -94,7 +94,7 @@ jobs:
           file: coverage/lcov.info
 
   build_android:
-    if: ${{ github.ref == 'refs/heads/ci/create-continous-integration' || github.ref == 'refs/heads/master' }}
+    if: ${{ github.ref == 'refs/heads/master' }}
     needs: [analyze, test]
     runs-on: ubuntu-latest
     timeout-minutes: 60
@@ -104,12 +104,11 @@ jobs:
 
       - name: Fetch coverage badge
         id: coverage-cache
-        uses: actions/cache@v3
+        uses: actions/cache/restore@v3
         with:
-          path: resources
+          path: coverage_badge.svg
           key: coverage-cache-${{ github.sha }}
-          restore-keys: |
-            coverage-cache-${{ github.sha }}
+          fail-on-cache-miss: true
 
       - name: Setup Java for Android
         uses: actions/setup-java@v1
@@ -143,6 +142,8 @@ jobs:
           git config advice.addIgnoredFile false
           git add -f ./resources/app-release.apk
           git diff --exit-code || git commit -am "chore: add release apk"
+          git push
+          mv coverage_badge.svg ./resources
           git add -f ./resources/coverage_badge.svg
           git diff --exit-code || git commit -am "chore: add coverage badge"
           git push
