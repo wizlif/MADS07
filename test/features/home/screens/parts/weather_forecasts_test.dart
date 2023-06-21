@@ -63,7 +63,7 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.byType(SliverPersistentHeader), findsOneWidget);
     expect(find.byType(AppbarHeader), findsOneWidget);
-    expect(find.byType(ForecastsList), findsOneWidget);
+    expect(find.byType(ForecastsList, skipOffstage: false), findsOneWidget);
   });
 
   testWidgets(
