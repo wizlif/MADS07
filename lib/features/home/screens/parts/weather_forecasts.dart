@@ -9,27 +9,18 @@ class WeatherForecastsList extends ConsumerWidget {
 
     return forecastsSync.when(
       data: (forecasts) {
-        final color = forecasts.first.first.state.color;
         return Scaffold(
-          backgroundColor: color,
+          backgroundColor: forecasts.color,
           body: CustomScrollView(
             slivers: [
               SliverPersistentHeader(
                 delegate: AppBarDelegate(
                   expandedHeight: 357,
-                  secondaryColor: color,
+                  secondaryColor: forecasts.color,
                 ),
                 pinned: true,
               ),
-              SliverList(
-                delegate: SliverChildBuilderDelegate(
-                  childCount: forecasts.length - 1,
-                  (context, index) {
-                    final forecast = forecasts[index + 1].first;
-                    return ForecastTile(forecast: forecast);
-                  },
-                ),
-              )
+              ForecastsList(forecasts: forecasts),
             ],
           ),
         );

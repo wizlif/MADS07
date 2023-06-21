@@ -10,6 +10,7 @@ part 'parts/appbar_delegate.dart';
 part 'parts/appbar_header.dart';
 part 'parts/forecast_tile.dart';
 part 'parts/weather_forecasts.dart';
+part 'parts/forecasts_list.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
