@@ -135,6 +135,7 @@ jobs:
 
       - name: Build apk
         run: |
+          echo ${{ secrets.ANDROID_MAP_CONF }} | base64 -d > android/maps.properties
           flutter build apk --release
           mv build/app/outputs/flutter-apk/app-release.apk ./resources/
           git config --global user.name 'Git Bot'
