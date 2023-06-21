@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:lottie/lottie.dart';
 import 'package:nssf_interview/core/utils/context.ext.dart';
 import 'package:nssf_interview/features/home/controllers/forecast.controller.dart';
 import 'package:nssf_interview/features/home/controllers/weather.controller.dart';

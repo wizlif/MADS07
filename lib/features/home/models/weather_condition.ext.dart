@@ -33,9 +33,9 @@ enum WeatherState {
   const WeatherState(this.value);
 }
 
-extension WeatherExtension on WeatherState{
+extension WeatherExtension on WeatherState {
   Color get color {
-        switch (this) {
+    switch (this) {
       case WeatherState.SUNNY:
         return const Color(0xFF4A90E2);
       case WeatherState.CLOUDY:

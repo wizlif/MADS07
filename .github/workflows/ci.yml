@@ -1,0 +1,150 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    types: [opened, synchronize]
+  workflow_dispatch:
+
+env:
+  flutter_version: "3.7.9"
+  flutter_channel: "stable"
+  java_version: "12.x"
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Fetch code from repository
+        uses: actions/checkout@v2
+
+      - name: Cache Flutter install
+        uses: actions/cache@v3
+        with:
+          path: /opt/hostedtoolcache/flutter
+          key: cache-flutter-${{ env.flutter_channel }}-${{ env.flutter_version }}-${{ runner.os }}
+
+      - name: Setup the Flutter environment
+        uses: subosito/flutter-action@v2
+        with:
+          channel: ${{ env.flutter_channel }}
+          flutter-version: ${{ env.flutter_version }}
+
+      - name: Get Flutter dependencies
+        run: flutter pub get .
+
+      - name: Check for any formatting issues
+        run: dart format --set-exit-if-changed .
+
+      - name: Build generated code
+        run: |
+          echo ${{ secrets.ENV }} | base64 -d > .env
+          flutter pub run build_runner build --delete-conflicting-outputs
+
+      - name: Statically analyze the Dart code
+        run: |
+          dart analyze .
+
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Fetch code from repository
+        uses: actions/checkout@v3
+
+      - name: Cache Flutter install
+        uses: actions/cache@v3
+        with:
+          path: /opt/hostedtoolcache/flutter
+          key: cache-flutter-${{ env.flutter_channel }}-${{ env.flutter_version }}-${{ runner.os }}
+
+      - name: Setup the Flutter environment
+        uses: subosito/flutter-action@v2
+        with:
+          channel: ${{ env.flutter_channel }}
+          flutter-version: ${{ env.flutter_version }}
+
+      - name: Get Flutter dependencies
+        run: flutter pub get .
+
+      - name: Build generated code
+        run: |
+          echo ${{ secrets.ENV }} | base64 -d > .env
+          flutter pub run build_runner build --delete-conflicting-outputs
+
+      - name: Run tests and generate coverage
+        run: |
+          flutter test --coverage -r expanded .
+          flutter pub run test_coverage_badge
+      
+      - name: Cache coverage badge
+        uses: actions/cache/save@v3
+        id: coverage-cache
+        with:
+          path: coverage_badge.svg
+          key: coverage-cache-${{ github.sha }}
+
+
+      - name: Upload coverage to codecov
+        uses: codecov/codecov-action@v3
+        with:
+          verbose: true
+          file: coverage/lcov.info
+
+  build_android:
+    if: ${{ github.ref == 'refs/heads/master' }}
+    needs: [analyze, test]
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Fetch code from repository
+        uses: actions/checkout@v3
+
+      - name: Fetch coverage badge
+        id: coverage-cache
+        uses: actions/cache/restore@v3
+        with:
+          path: coverage_badge.svg
+          key: coverage-cache-${{ github.sha }}
+          fail-on-cache-miss: true
+
+      - name: Setup Java for Android
+        uses: actions/setup-java@v1
+        with:
+          java-version: ${{ env.java_version }}
+
+      - name: Cache Flutter install
+        uses: actions/cache@v3
+        with:
+          path: /opt/hostedtoolcache/flutter
+          key: cache-flutter-${{ env.flutter_channel }}-${{ env.flutter_version }}-${{ runner.os }}
+
+      - name: Setup the Flutter environment
+        uses: subosito/flutter-action@v2
+        with:
+          channel: ${{ env.flutter_channel }}
+          flutter-version: ${{ env.flutter_version }}
+
+      - name: Get Flutter dependencies
+        run: |
+          flutter pub get .
+          echo ${{ secrets.ENV }} | base64 -d > .env
+          flutter pub run build_runner build --delete-conflicting-outputs
+
+      - name: Build apk
+        run: |
+          flutter build apk --release
+          mv build/app/outputs/flutter-apk/app-release.apk ./resources/
+          git config --global user.name 'Git Bot'
+          git config --global user.email 'wizlif@users.noreply.github.com'
+          git config advice.addIgnoredFile false
+          git add -f ./resources/app-release.apk
+          git diff --exit-code || git commit -am "chore: add release apk"
+          git push
+          mv coverage_badge.svg ./resources
+          git add -f ./resources/coverage_badge.svg
+          git diff --exit-code || git commit -am "chore: add coverage badge"
+          git push
+

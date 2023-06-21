@@ -56,3 +56,5 @@ app.*.map.json
 **/*.gr.dart
 
 **/.fvm/flutter_sdk
+
+**/coverage_badge.svg
