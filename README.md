@@ -1,4 +1,4 @@
-# nssf_interview ![Coverage](https://raw.githubusercontent.com/wizlif/flutter_interview/master/resources/coverage_badge.svg?sanitize=true)
+# nssf_interview ![Coverage](https://raw.githubusercontent.com/wizlif/flutter_interview/master/resources/coverage_badge.svg)
 
 A new Flutter project.
 
