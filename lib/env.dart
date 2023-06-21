@@ -25,7 +25,7 @@ Uri foreCastUri({
   int count = 5,
 }) {
   return Uri.parse(
-    '${_AppEnv.openWeatherMapApiUrl}/forecast?lat=$latitude&lon=$longitude&appid=${_AppEnv.openWeatherMapApiKey}&units=metric',
+    '${_AppEnv.openWeatherMapApiUrl}/data/2.5/forecast?lat=$latitude&lon=$longitude&appid=${_AppEnv.openWeatherMapApiKey}&units=metric',
   );
 }
 
@@ -35,6 +35,15 @@ Uri foreCastUri({
 /// returns A [Uri] representing the open weather request for today's weather.
 Uri weatherUri({required double longitude, required double latitude}) {
   return Uri.parse(
-    '${_AppEnv.openWeatherMapApiUrl}/weather?lat=$latitude&lon=$longitude&appid=${_AppEnv.openWeatherMapApiKey}&units=metric',
+    '${_AppEnv.openWeatherMapApiUrl}/data/2.5/weather?lat=$latitude&lon=$longitude&appid=${_AppEnv.openWeatherMapApiKey}&units=metric',
+  );
+}
+
+/// Generates a Uri for an open weather request to retrieve coordinates info
+///
+/// returns A [Uri] representing the open weather reverse geocode request.
+Uri reverseGeoCodeUri({required double longitude, required double latitude}) {
+  return Uri.parse(
+    '${_AppEnv.openWeatherMapApiUrl}/geo/1.0/reverse?lat=$latitude&lon=$longitude&limit=1&appid=${_AppEnv.openWeatherMapApiKey}',
   );
 }

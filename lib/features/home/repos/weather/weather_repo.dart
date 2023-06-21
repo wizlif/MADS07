@@ -3,6 +3,7 @@ import 'dart:isolate';
 
 import 'package:http/http.dart' as http;
 import 'package:nssf_interview/env.dart';
+import 'package:nssf_interview/features/home/models/geo_info.dart';
 import 'package:nssf_interview/features/home/models/weather_condition.dart';
 import 'package:nssf_interview/features/home/models/weather_forecast.dart';
 
@@ -65,6 +66,30 @@ class WeatherRepo implements IWeatherRepo {
       final json = jsonDecode(response.body) as Map<String, dynamic>;
 
       return WeatherCondition.fromJson(json);
+    });
+  }
+
+  @override
+  Future<GeoInfo> getCoordinateInfo(
+      {required double longitude, required double latitude}) async {
+    final response = await httpClient.get(
+      reverseGeoCodeUri(
+        longitude: longitude,
+        latitude: latitude,
+      ),
+    );
+
+    // Exit if response is not successful
+    if (response.statusCode != 200) {
+      return Future.error('Error retrieving location info.');
+    }
+
+    // Parse and return today's weather
+    return Isolate.run(() {
+      final json = jsonDecode(response.body) as List<dynamic>;
+      if (json.isEmpty) return Future.error('No locatio info');
+
+      return GeoInfo.fromJson(json.first);
     });
   }
 }
