@@ -18,8 +18,8 @@ class ConditionSys extends Equatable {
         type: (json['type'] as num?)?.toInt(),
         id: (json['id'] as num?)?.toInt(),
         country: json['country'] as String,
-        sunrise: (json['sunrise'] as num).toInt(),
-        sunset: (json['sunset'] as num).toInt(),
+        sunrise: (json['sunrise'] as num?)?.toInt(),
+        sunset: (json['sunset'] as num?)?.toInt(),
       );
 
   /// A description for type
@@ -32,10 +32,10 @@ class ConditionSys extends Equatable {
   final String country;
 
   /// A description for sunrise
-  final int sunrise;
+  final int? sunrise;
 
   /// A description for sunset
-  final int sunset;
+  final int? sunset;
 
   /// Creates a copy of the current TodaysSys with property changes
   ConditionSys copyWith({

@@ -1,0 +1,27 @@
+{
+  "model_name": "geo_info",
+  "properties": [
+    {
+      "name": "name",
+      "type": "String"
+    },
+    {
+      "name": "lat",
+      "type": "double"
+    },
+    {
+      "name": "lon",
+      "type": "double"
+    },
+    {
+      "name": "country",
+      "type": "String"
+    },
+    {
+      "name": "state",
+      "type": "String"
+    }
+  ],
+  "style": "basic",
+  "additionals": ["json", "equatable", "copyWith"]
+}

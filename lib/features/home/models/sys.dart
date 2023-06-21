@@ -9,11 +9,11 @@ class Sys extends Equatable {
 
   /// Creates a Sys from Json map
   factory Sys.fromJson(Map<String, dynamic> json) => Sys(
-        pod: json['pod'] as String,
+        pod: json['pod'] as String?,
       );
 
   /// A description for pod
-  final String pod;
+  final String? pod;
 
   /// Creates a copy of the current Sys with property changes
   Sys copyWith({String? pod}) {

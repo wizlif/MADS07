@@ -21,6 +21,19 @@ if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
 
+def mapsProperties = new Properties()
+def mapsPropertiesFile = rootProject.file('maps.properties')
+if (mapsPropertiesFile.exists()) {
+    mapsProperties.load(new FileInputStream(mapsPropertiesFile))
+}
+
+def mapsApiKey = mapsProperties['mapsApiKey'];
+if (mapsApiKey == null) {
+    println 'WARNING: "mapsApiKey" is not set in maps.properties file. Defaulting to empty string.'
+    mapsApiKey = '';
+}
+
+
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
@@ -47,7 +60,7 @@ android {
         applicationId "dev.nssf.interview.nssf_interview"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-build-configuration.
-        minSdkVersion flutter.minSdkVersion
+        minSdkVersion 20
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
@@ -58,6 +71,15 @@ android {
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig signingConfigs.debug
+            manifestPlaceholders = [
+                    mapsApiKey          : mapsApiKey,
+            ]
+        }
+        debug {
+            signingConfig signingConfigs.debug
+            manifestPlaceholders = [
+                    mapsApiKey          : mapsApiKey,
+            ]
         }
     }
 }

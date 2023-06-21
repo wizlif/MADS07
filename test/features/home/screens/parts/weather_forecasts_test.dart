@@ -1,8 +1,10 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:hive/hive.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:nssf_interview/features/home/models/weather_condition.dart';
 import 'package:nssf_interview/features/home/models/weather_forecast.dart';
@@ -17,6 +19,8 @@ import '../../repos/location/location_repo.mock.dart';
 import '../../repos/weather/weather_repo.mock.dart';
 
 void main() {
+  Hive.init(Directory.current.path);
+
   late IWeatherRepo weatherRepo;
   late ILocationRepo locationRepo;
 
@@ -72,7 +76,7 @@ void main() {
     final exception = Exception('Some error occured');
 
     when(
-      () => weatherRepo.getForecasts(
+      () => weatherRepo.getTodaysWeather(
         longitude: any(named: 'longitude'),
         latitude: any(named: 'latitude'),
       ),

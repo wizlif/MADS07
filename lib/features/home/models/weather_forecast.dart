@@ -42,10 +42,10 @@ class WeatherForecast extends Equatable {
       weather: weatherList,
       clouds: Clouds.fromJson(json['clouds'] as Map<String, dynamic>),
       wind: Wind.fromJson(json['wind'] as Map<String, dynamic>),
-      visibility: (json['visibility'] as num).toInt(),
-      pop: (json['pop'] as num).toDouble(),
+      visibility: (json['visibility'] as num?)?.toInt(),
+      pop: (json['pop'] as num?)?.toDouble(),
       sys: Sys.fromJson(json['sys'] as Map<String, dynamic>),
-      dt_txt: json['dt_txt'] as String,
+      dt_txt: json['dt_txt'] as String?,
       state: weatherList.weatherState,
     );
   }
@@ -66,16 +66,16 @@ class WeatherForecast extends Equatable {
   final Wind wind;
 
   /// A description for visibility
-  final int visibility;
+  final int? visibility;
 
   /// A description for pop
-  final double pop;
+  final double? pop;
 
   /// A description for sys
   final Sys sys;
 
   /// A description for dt_txt
-  final String dt_txt;
+  final String? dt_txt;
 
   /// Weather State
   final WeatherState state;

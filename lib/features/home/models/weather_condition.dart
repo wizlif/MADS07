@@ -39,15 +39,15 @@ class WeatherCondition extends Equatable {
       weather: weatherList,
       base: json['base'] as String,
       main: Main.fromJson(json['main'] as Map<String, dynamic>),
-      visibility: json['visibility'] as int,
+      visibility: json['visibility'] as int?,
       wind: Wind.fromJson(json['wind'] as Map<String, dynamic>),
       clouds: Clouds.fromJson(json['clouds'] as Map<String, dynamic>),
       dt: json['dt'] as int,
       sys: ConditionSys.fromJson(json['sys'] as Map<String, dynamic>),
-      timezone: json['timezone'] as int,
-      id: json['id'] as int,
+      timezone: json['timezone'] as int?,
+      id: json['id'] as int?,
       name: json['name'] as String,
-      cod: json['cod'] as int,
+      cod: json['cod'] as int?,
       state: weatherList.weatherState,
     );
   }
@@ -56,13 +56,13 @@ class WeatherCondition extends Equatable {
   final List<Weather> weather;
 
   /// A description for base
-  final String base;
+  final String? base;
 
   /// A description for main
   final Main main;
 
   /// A description for visibility
-  final int visibility;
+  final int? visibility;
 
   /// A description for wind
   final Wind wind;
@@ -77,16 +77,16 @@ class WeatherCondition extends Equatable {
   final ConditionSys sys;
 
   /// A description for timezone
-  final int timezone;
+  final int? timezone;
 
   /// A description for id
-  final int id;
+  final int? id;
 
   /// A description for name
   final String name;
 
   /// A description for cod
-  final int cod;
+  final int? cod;
 
   /// Weather State
   final WeatherState state;

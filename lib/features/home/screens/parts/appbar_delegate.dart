@@ -40,10 +40,18 @@ class AppBarDelegate extends SliverPersistentHeaderDelegate {
             );
           },
           error: (error, stack) {
-            return AppBar(title: Text(error.toString()));
+            return AppBar(
+              title: Text(error.toString()),
+              backgroundColor: secondaryColor,
+            );
           },
           loading: () {
-            return AppBar(title: const Text('Loading ...'));
+            return AppBar(
+              title: const CircularProgressIndicator(
+                color: Colors.white,
+              ),
+              backgroundColor: secondaryColor,
+            );
           },
         );
       },

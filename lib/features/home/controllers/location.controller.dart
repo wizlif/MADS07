@@ -4,7 +4,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'location.controller.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 class LocationController extends _$LocationController {
   @override
   FutureOr<Position> build() async {
