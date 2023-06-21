@@ -1,8 +1,13 @@
 import 'package:equatable/equatable.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:hive/hive.dart';
+
+part 'geo_info.g.dart';
 
 /// {@template geo_info}
 /// GeoInfo description
 /// {@endtemplate}
+@HiveType(typeId: 1)
 class GeoInfo extends Equatable {
   /// {@macro geo_info}
   const GeoInfo({
@@ -23,18 +28,23 @@ class GeoInfo extends Equatable {
       );
 
   /// A description for name
+  @HiveField(0)
   final String name;
 
   /// A description for lat
+  @HiveField(1)
   final double lat;
 
   /// A description for lon
+  @HiveField(2)
   final double lon;
 
   /// A description for country
+  @HiveField(3)
   final String country;
 
   /// A description for state
+  @HiveField(4)
   final String state;
 
   /// Creates a copy of the current GeoInfo with property changes
@@ -71,4 +81,17 @@ class GeoInfo extends Equatable {
         'country': country,
         'state': state,
       };
+
+  // Hive key
+  String get key => '$lat-$lon';
+
+  factory GeoInfo.fromPosition(Position position) {
+    return GeoInfo(
+      name: '',
+      lat: position.latitude,
+      lon: position.longitude,
+      country: '',
+      state: '',
+    );
+  }
 }

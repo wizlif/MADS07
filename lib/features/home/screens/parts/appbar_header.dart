@@ -48,18 +48,17 @@ class AppbarHeader extends StatelessWidget {
                   ],
                 ),
               ),
-              // Positioned.fill(
-              //   child: Align(
-              //     alignment: Alignment.centerLeft,
-              //     child: Padding(
-              //       padding: const EdgeInsets.all(8.0),
-              //       child: Lottie.asset(
-              //         weather.animatedIcon,
-              //         width: context.screenWidth / 3,
-              //       ),
-              //     ),
-              //   ),
-              // ),
+              const Positioned.fill(
+                child: Align(
+                  alignment: Alignment.topRight,
+                  child: SafeArea(
+                    child: Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: LikeButton(),
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
         ),

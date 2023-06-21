@@ -1,4 +1,5 @@
 import 'package:collection/collection.dart';
+import 'package:nssf_interview/core/controllers/color.controller.dart';
 import 'package:nssf_interview/features/home/models/weather_forecast.dart';
 import 'package:nssf_interview/features/home/repos/weather/weather_repo.provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -20,10 +21,15 @@ class ForecastController extends _$ForecastController {
       latitude: location.latitude,
     );
 
-    return forecasts
+    final weatherForecasts = forecasts
         .groupListsBy((forecast) => forecast.dt.day)
         .entries
         .map((group) => group.value)
         .toList();
+
+    // Set page color
+    ref.read(colorControllerProvider.notifier).setColor(weatherForecasts.color);
+
+    return weatherForecasts;
   }
 }
