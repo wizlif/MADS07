@@ -26,9 +26,9 @@ class FavoritesPage extends ConsumerWidget {
 
           return FloatingActionButton(
             onPressed: () => context.push('/favorites-map', extra: data),
-            child: const Icon(
-              CupertinoIcons.map,
-            ),
+            foregroundColor: color,
+            backgroundColor: Colors.white,
+            child: const Icon(CupertinoIcons.map),
           );
         },
         orElse: () => const SizedBox.shrink(),

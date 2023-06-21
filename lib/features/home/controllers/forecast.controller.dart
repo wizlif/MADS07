@@ -21,15 +21,10 @@ class ForecastController extends _$ForecastController {
       latitude: location.latitude,
     );
 
-    final weatherForecasts = forecasts
+    return forecasts
         .groupListsBy((forecast) => forecast.dt.day)
         .entries
         .map((group) => group.value)
         .toList();
-
-    // Set page color
-    ref.read(colorControllerProvider.notifier).setColor(weatherForecasts.color);
-
-    return weatherForecasts;
   }
 }

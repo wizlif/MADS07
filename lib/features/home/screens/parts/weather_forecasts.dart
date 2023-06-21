@@ -5,28 +5,35 @@ class WeatherForecastsList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final forecastsSync = ref.watch(forecastControllerProvider);
+    final currentWeatherSync = ref.watch(weatherControllerProvider);
 
-    return forecastsSync.when(
-      data: (forecasts) {
+    return currentWeatherSync.when(
+      data: (weatherCondition) {
         return Scaffold(
-          backgroundColor: forecasts.color,
+          backgroundColor: weatherCondition.color,
           body: CustomScrollView(
             slivers: [
               SliverPersistentHeader(
                 delegate: AppBarDelegate(
                   expandedHeight: 357,
-                  secondaryColor: forecasts.color,
+                  secondaryColor: weatherCondition.color,
                 ),
                 pinned: true,
               ),
-              ForecastsList(forecasts: forecasts),
+              const ForecastsList(),
             ],
           ),
         );
       },
       error: (error, stack) {
-        return Center(child: Text(error.toString()));
+        return Center(
+          child: Text(
+            error.toString(),
+            style: TextStyle(
+              color: context.primary,
+            ),
+          ),
+        );
       },
       loading: () {
         return const Center(child: CircularProgressIndicator());
