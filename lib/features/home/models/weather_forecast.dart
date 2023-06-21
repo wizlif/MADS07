@@ -10,6 +10,8 @@ import 'package:nssf_interview/features/home/models/weather.dart';
 import 'package:nssf_interview/features/home/models/weather_condition.dart';
 import 'package:nssf_interview/features/home/models/wind.dart';
 
+part 'weather_forecast.ext.dart';
+
 /// {@template day_weather}
 /// DayWeather description
 /// {@endtemplate}

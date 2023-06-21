@@ -1,11 +1,6 @@
 part of 'weather_condition.dart';
 
 extension WeatherConditionExtension on WeatherCondition {
-  /// Weather icon lottie animation
-  // String get animatedIcon {
-  //   return 'assets/animations/$iconCode.json';
-  // }
-
   /// Weather background
   String get background {
     return 'assets/images/sea_${state.value}.png';
