@@ -33,12 +33,12 @@ samples, guidance on mobile development, and a full API reference.
     + [x] Integration into a CI/CD build pipeline
     + [x] Code coverage integration
     + [x] Static code analysis
-    + [ ] Please note these are additional requirements, complete the ones you are comfortable with to demonstrate your knowledge and experience
+    + [x] Please note these are additional requirements, complete the ones you are comfortable with to demonstrate your knowledge and experience
 2. Please also take some initiative and implement some additional features like,
-    + [ ] The ability to save different weather locations as favourites
-    + [ ] The ability to view a list of favourites
-    + [ ] The ability to get extra information about a specific location
-    + [ ] Using something like the Google Places API - https://developers.google.com/places/web-service/intro
+    + [x] The ability to save different weather locations as favourites
+    + [x] The ability to view a list of favourites
+    + [x] The ability to get extra information about a specific location
+    + [x] Using something like the Google Places API - https://developers.google.com/places/web-service/intro
     + [ ] The ability to see weather information while the application is offline (show time last updated etc)
-    + [ ] Allow the user to view saved locations on a map
-        + [ ] Meaning the user should be able to access a map and see all the weather locations they have saved as favourites and where they are now.
+    + [x] Allow the user to view saved locations on a map
+        + [x] Meaning the user should be able to access a map and see all the weather locations they have saved as favourites and where they are now.

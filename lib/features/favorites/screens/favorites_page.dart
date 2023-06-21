@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:nssf_interview/core/controllers/color.controller.dart';
 import 'package:nssf_interview/features/favorites/controllers/favorites.controller.dart';
 
@@ -17,6 +19,19 @@ class FavoritesPage extends ConsumerWidget {
       appBar: AppBar(
         title: const Text('Favorites'),
         backgroundColor: color,
+      ),
+      floatingActionButton: favoritesRef.maybeWhen(
+        data: (data) {
+          if (data.isEmpty) return const SizedBox.shrink();
+
+          return FloatingActionButton(
+            onPressed: () => context.push('/favorites-map', extra: data),
+            child: const Icon(
+              CupertinoIcons.map,
+            ),
+          );
+        },
+        orElse: () => const SizedBox.shrink(),
       ),
       body: Column(
         children: [

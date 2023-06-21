@@ -58,3 +58,5 @@ app.*.map.json
 **/.fvm/flutter_sdk
 
 **/coverage_badge.svg
+maps.properties
+GoogleMaps.xcconfig
